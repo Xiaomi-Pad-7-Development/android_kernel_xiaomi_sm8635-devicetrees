@@ -68,8 +68,12 @@ dtbo-$(CONFIG_ARCH_CLIFFS) += display/cliffs-sde.dtbo \
 		display/cliffs-sde-display-mtp-overlay.dtbo \
 		display/cliffs-sde-display-mtp-wcd9395-overlay.dtbo \
 		display/cliffs-sde-display-qrd-overlay.dtbo \
-		display/cliffs-sde-display-atp-overlay.dtbo \
-		display/peridot-sde-display-mtp-overlay.dtbo
+		display/cliffs-sde-display-atp-overlay.dtbo
+ifneq (,$(findstring uke,$(TARGET_PRODUCT)))
+dtbo-$(CONFIG_ARCH_CLIFFS) += display/uke-sde-display-mtp-overlay.dtbo
+else
+dtbo-$(CONFIG_ARCH_CLIFFS) += display/peridot-sde-display-mtp-overlay.dtbo
+endif
 
 else
 dtbo-$(CONFIG_ARCH_CLIFFS) += display/trustedvm-cliffs-sde-display-mtp-overlay.dtbo \
