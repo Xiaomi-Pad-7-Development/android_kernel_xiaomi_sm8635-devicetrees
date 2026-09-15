@@ -42,8 +42,10 @@ dtbo-y += pineapple-audio.dtbo \
                  cliffs-audio-mtp-wcd9395.dtbo \
                  cliffs7-audio-mtp-wcd9395.dtbo \
                  cliffs-audio-atp.dtbo \
-                 cliffs7-audio-atp.dtbo \
-                 peridot-audio-mtp.dtbo
+                 cliffs7-audio-atp.dtbo
+ifeq (,$(findstring uke,$(TARGET_PRODUCT)))
+dtbo-$(CONFIG_ARCH_CLIFFS) += peridot-audio-mtp.dtbo
+endif
 endif
 
 ifeq ($(CONFIG_ARCH_VOLCANO), y)
