@@ -98,13 +98,19 @@ pineapple-overlays-dtb-$(CONFIG_ARCH_VOLCANO) += $(VOLCANO_BOARDS) $(NOAPQ_VOLCA
 
 dtb-y += $(pineapple-dtb-y)
 else
-CLIFFS_BASE_DTB += cliffs.dtb cliffs7.dtb
+CLIFFS_BASE_DTB += cliffs.dtb cliffs7.dtb cliffs7p.dtb cliffsp.dtb
+
+ifneq (,$(findstring uke,$(TARGET_PRODUCT)))
+XIAOMI_CLIFFS_BOARDS += \
+		 uke-sm8635-overlay.dtbo
+else
 XIAOMI_CLIFFS_BOARDS += \
 		 peridot-sm8635-overlay.dtbo
+endif
 
-peridot-overlays-dtb-$(CONFIG_ARCH_CLIFFS) += $(XIAOMI_CLIFFS_BOARDS) $(CLIFFS_BASE_DTB)
+xiaomi-overlays-dtb-$(CONFIG_ARCH_CLIFFS) += $(XIAOMI_CLIFFS_BOARDS) $(CLIFFS_BASE_DTB)
 
-dtb-y += $(peridot-overlays-dtb-y)
+dtb-y += $(xiaomi-overlays-dtb-y)
 endif
 KALAMA_BASE_DTB += kalama.dtb kalama-v2.dtb
 KALAMA_APQ_BASE_DTB += kalamap.dtb kalamap-v2.dtb
