@@ -185,3 +185,13 @@
 &wsa_spkr_en02 {
 	status = "disabled";
 };
+
+/* uke stock firmware ships adsp.mdt/adsp_dtb.mdt; the generic cliffs audio
+ * overlay above asks for the adsp2 image names, which do not exist here and
+ * make adsp-loader fail ("invalid firmware metadata"), leaving AudioService
+ * blocked and system_server watchdog-restarted. Use the stock names.
+ */
+&adsp_loader {
+	adsp-fw-name = "adsp.mdt";
+	adsp-dtb-name = "adsp_dtb.mdt";
+};
