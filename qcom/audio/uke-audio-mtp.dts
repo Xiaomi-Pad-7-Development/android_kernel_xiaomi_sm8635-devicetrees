@@ -195,3 +195,14 @@
 	adsp-fw-name = "adsp.mdt";
 	adsp-dtb-name = "adsp_dtb.mdt";
 };
+
+/* uke has no WSA speaker amps (wsa884x/wsa883x are disabled above), so the
+ * sound card must only list the codecs that actually register. The generic
+ * cliffs overlay lists the disabled wsa884x nodes, which makes
+ * snd_soc_register_card() defer forever and the audio HAL block.
+ * Only lpass-cdc + wcd939x are present on this board.
+ */
+&pineapple_snd {
+	asoc-codec = <&stub_codec>, <&lpass_cdc>, <&wcd939x_codec>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc", "wcd939x_codec";
+};
