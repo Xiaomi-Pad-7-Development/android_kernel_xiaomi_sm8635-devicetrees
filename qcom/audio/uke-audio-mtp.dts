@@ -195,14 +195,3 @@
 	adsp-fw-name = "adsp.mdt";
 	adsp-dtb-name = "adsp_dtb.mdt";
 };
-
-/* uke does not route the wcd reset through TLMM/LPI pinctrl: the stock DT has
- * empty pinctrl phandles here. Keeping the generic overlay's wcd_reset_active/
- * wcd_reset_sleep references makes msm_cdc_pinctrl@32 defer its probe forever,
- * so the ASoC card is never registered, audio HAL open blocks and AudioService
- * wedges system_server into a watchdog boot loop.
- */
-&wcd_rst_gpio {
-	pinctrl-0 = <0>;
-	pinctrl-1 = <0>;
-};
