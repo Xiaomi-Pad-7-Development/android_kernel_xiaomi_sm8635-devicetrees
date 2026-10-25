@@ -210,4 +210,11 @@
 	 * btfm_slim_codec component never registers, so the card would defer
 	 * forever waiting for the SLIMBUS_7 RX/TX links. */
 	qcom,wcn-bt = <0>;
+
+	/* The WCD USBSS notifier used by the USB-C analog (AATC) path fails
+	 * with -EINVAL in this audio-kernel build, which makes
+	 * wcd_mbhc_start() fail and the whole sound card never register.
+	 * Keep USB-C analog headset detection off for now; digital USB audio
+	 * and BT audio are unaffected. */
+	qcom,msm-mbhc-usbc-audio-supported = <0>;
 };
