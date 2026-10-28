@@ -29,7 +29,7 @@
 
 		lid_hall {
 			label = "lid_hall";
-			hall_pin = <&tlmm 99 GPIO_ACTIVE_LOW>;
+			gpios = <&tlmm 99 GPIO_ACTIVE_LOW>;
 			linux,input-type = <5>;
 			linux,code = <0>;
 			interrupts-extended = <&hall_smp2p_in_lid 0 0>,<&hall_smp2p_in_lid 1 0>;
@@ -38,7 +38,7 @@
 
 		table_hall {
 			label = "table_hall";
-			hall_pin = <&tlmm 100 GPIO_ACTIVE_LOW>;
+			gpios = <&tlmm 100 GPIO_ACTIVE_LOW>;
 			linux,input-type = <5>;
 			linux,code = <1>;
 			interrupts-extended = <&hall_smp2p_in_table 0 0>,<&hall_smp2p_in_table 1 0>;
