@@ -30,7 +30,14 @@ dtbo-y += pineapple-audio.dtbo \
                  pineapplep-audio-hdk.dtbo \
                  pineapplep-audio-aim500.dtbo \
                  pineapplep-audio-aim500-v2.dtbo \
-                 cliffs-audio.dtbo \
+                 cliffs-audio.dtbo
+ifneq (,$(findstring uke,$(TARGET_PRODUCT)))
+# uke has its own audio overlay for all four of its SoC ids. The reference
+# board overlays describe hardware it does not have, and merging them splits
+# its dtbo in two.
+dtbo-$(CONFIG_ARCH_CLIFFS) += uke-audio-mtp.dtbo
+else
+dtbo-$(CONFIG_ARCH_CLIFFS) += peridot-audio-mtp.dtbo \
                  cliffs-audio-mtp.dtbo \
                  cliffs7-audio-mtp.dtbo \
                  cliffs-audio-qrd.dtbo \
@@ -43,8 +50,6 @@ dtbo-y += pineapple-audio.dtbo \
                  cliffs7-audio-mtp-wcd9395.dtbo \
                  cliffs-audio-atp.dtbo \
                  cliffs7-audio-atp.dtbo
-ifeq (,$(findstring uke,$(TARGET_PRODUCT)))
-dtbo-$(CONFIG_ARCH_CLIFFS) += peridot-audio-mtp.dtbo
 endif
 endif
 
