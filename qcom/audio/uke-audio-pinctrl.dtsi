@@ -1,0 +1,136 @@
+&tlmm {
+	sbu_uart_en_ctrl {
+		sbu_uart_en_active: uart_audio_en_active {
+			mux {
+				function = "gpio";
+				pins = "gpio97";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				output-high;
+				pins = "gpio97";
+			};
+		};
+		sbu_uart_en_idle: uart_audio_en_idle {
+			mux {
+				function = "gpio";
+				pins = "gpio97";
+			};
+			config {
+				bias-pull-down;
+				drive-strength = <2>;
+				output-low;
+				pins = "gpio97";
+			};
+		};
+	};
+
+	fs19xx_irq_top_left {
+		fs19xx_irq_active_top_left: fs19xx_irq_active_top_left {
+			mux {
+				function = "gpio";
+				pins = "gpio47";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				input-enable;
+				pins = "gpio47";
+			};
+		};
+		fs19xx_irq_sleep_top_left: fs19xx_irq_sleep_top_left {
+			mux {
+				function = "gpio";
+				pins = "gpio47";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				input-enable;
+				pins = "gpio47";
+			};
+		};
+	};
+
+	fs19xx_irq_top_right {
+		fs19xx_irq_active_top_right: fs19xx_irq_active_top_right {
+			mux {
+				function = "gpio";
+				pins = "gpio69";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				input-enable;
+				pins = "gpio69";
+			};
+		};
+		fs19xx_irq_sleep_top_right: fs19xx_irq_sleep_top_right {
+			mux {
+				function = "gpio";
+				pins = "gpio69";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				input-enable;
+				pins = "gpio69";
+			};
+		};
+	};
+
+	fs19xx_irq_bottom_left {
+		fs19xx_irq_active_bottom_left: fs19xx_irq_active_bottom_left {
+			mux {
+				function = "gpio";
+				pins = "gpio31";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				input-enable;
+				pins = "gpio31";
+			};
+		};
+		fs19xx_irq_sleep_bottom_left: fs19xx_irq_sleep_bottom_left {
+			mux {
+				function = "gpio";
+				pins = "gpio31";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				input-enable;
+				pins = "gpio31";
+			};
+		};
+	};
+
+	fs19xx_irq_bottom_right {
+		fs19xx_irq_active_bottom_right: fs19xx_irq_active_bottom_right {
+			mux {
+				function = "gpio";
+				pins = "gpio129";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				input-enable;
+				pins = "gpio129";
+			};
+		};
+		fs19xx_irq_sleep_bottom_right: fs19xx_irq_sleep_bottom_right {
+			mux {
+				function = "gpio";
+				pins = "gpio129";
+			};
+			config {
+				bias-disable;
+				drive-strength = <2>;
+				input-enable;
+				pins = "gpio129";
+			};
+		};
+	};
+};

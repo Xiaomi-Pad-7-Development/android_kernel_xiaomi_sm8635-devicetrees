@@ -1,0 +1,187 @@
+/dts-v1/;
+/plugin/;
+
+#include "cliffs-audio-overlay.dtsi"
+#include "uke-audio-pinctrl.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Uke based on SM8635";
+	compatible = "qcom,cliffs-mtp", "qcom,cliffs", "qcom,mtp";
+	qcom,msm-id = <614 0x10000>, <632 0x10000>, <642 0x10000>, <643 0x10000>;
+	qcom,board-id = <8 0>;
+	xiaomi,miboard-id = <0xB 0>;
+};
+
+&soc {
+	sbu_uart_en: msm_cdc_pinctrl@150 {
+		#gpio-cells = <0>;
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&sbu_uart_en_active>;
+		pinctrl-1 = <&sbu_uart_en_idle>;
+	};
+};
+
+&spf_core_platform {
+	cdc_quin_mi2s_gpios: quin_mi2s_pinctrl {
+		#gpio-cells = <0>;
+		compatible = "qcom,msm-cdc-pinctrl";
+		pinctrl-names = "aud_active", "aud_sleep";
+		pinctrl-0 = <&lpi_tdm1_sck_active &lpi_tdm1_ws_active &lpi_tdm1_sd0_active &lpi_tdm1_sd1_active>;
+		pinctrl-1 = <&lpi_tdm1_sck_sleep &lpi_tdm1_ws_sleep &lpi_tdm1_sd0_sleep &lpi_tdm1_sd1_sleep>;
+		qcom,lpi-gpios;
+		status = "ok";
+	};
+};
+
+&pineapple_snd {
+	qcom,model = "cliffs-mtp-snd-card";
+	qcom,audio-routing = "AMIC1", "Analog Mic1",
+		"AMIC1", "MIC BIAS1",
+		"AMIC2", "Analog Mic2",
+		"AMIC2", "MIC BIAS2",
+		"AMIC3", "Analog Mic3",
+		"AMIC3", "MIC BIAS3",
+		"AMIC4", "Analog Mic4",
+		"AMIC4", "MIC BIAS3",
+		"AMIC5", "Analog Mic5",
+		"AMIC5", "MIC BIAS4",
+		"VA AMIC1", "Analog Mic1",
+		"VA AMIC1", "VA MIC BIAS1",
+		"VA AMIC2", "Analog Mic2",
+		"VA AMIC2", "VA MIC BIAS2",
+		"VA AMIC3", "Analog Mic3",
+		"VA AMIC3", "VA MIC BIAS3",
+		"VA AMIC4", "Analog Mic4",
+		"VA AMIC4", "VA MIC BIAS3",
+		"VA AMIC5", "Analog Mic5",
+		"VA AMIC5", "VA MIC BIAS4",
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC0", "MIC BIAS3",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC1", "MIC BIAS3",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC2", "MIC BIAS1",
+		"TX DMIC3", "Digital Mic3",
+		"TX DMIC3", "MIC BIAS1",
+		"IN1_HPHL", "HPHL_OUT",
+		"IN2_HPHR", "HPHR_OUT",
+		"IN3_EAR", "AUX_OUT",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"TX SWR_INPUT", "WCD_TX_OUTPUT",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA SWR_INPUT", "WCD_TX_OUTPUT",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic2",
+		"VA DMIC3", "Digital Mic3",
+		"VA DMIC0", "VA MIC BIAS3",
+		"VA DMIC1", "VA MIC BIAS3",
+		"VA DMIC2", "VA MIC BIAS1",
+		"VA DMIC3", "VA MIC BIAS1";
+	qcom,ext-disp-audio-rx = <1>;
+	qcom,quin-mi2s-gpios = <&cdc_quin_mi2s_gpios>;
+	qcom,tdm-audio-intf = <1>;
+	qcom,tdm-clk-attribute = <4>, <4>, <4>, <4>, <4>, <4>, <4>, <4>;
+	qcom,tdm-max-slots = <4>;
+	qcom,uart-audio-sw-gpio = <&sbu_uart_en>;
+	qcom,wsa-max-devs = <0>;
+};
+
+&qupv3_se11_i2c {
+	status = "ok";
+
+	fs19xx_smartpa@34 {
+		compatible = "foursemi,fs16xx";
+		reg = <0x34>;
+		status = "ok";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&fs19xx_irq_active_top_left>;
+		pinctrl-1 = <&fs19xx_irq_sleep_top_left>;
+		irq-gpio = <&tlmm 47 0x2008>;
+		reset-gpio = <&tlmm 30 0x00>;
+	};
+
+	fs19xx_smartpa@35 {
+		compatible = "foursemi,fs16xx";
+		reg = <0x35>;
+		status = "ok";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&fs19xx_irq_active_top_right>;
+		pinctrl-1 = <&fs19xx_irq_sleep_top_right>;
+		irq-gpio = <&tlmm 69 0x2008>;
+		reset-gpio = <&tlmm 149 0x00>;
+	};
+
+	fs19xx_smartpa@36 {
+		compatible = "foursemi,fs16xx";
+		reg = <0x36>;
+		status = "ok";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&fs19xx_irq_active_bottom_left>;
+		pinctrl-1 = <&fs19xx_irq_sleep_bottom_left>;
+		irq-gpio = <&tlmm 31 0x2008>;
+		reset-gpio = <&tlmm 124 0x00>;
+	};
+
+	fs19xx_smartpa@37 {
+		compatible = "foursemi,fs16xx";
+		reg = <0x37>;
+		status = "ok";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&fs19xx_irq_active_bottom_right>;
+		pinctrl-1 = <&fs19xx_irq_sleep_bottom_right>;
+		irq-gpio = <&tlmm 129 0x2008>;
+		reset-gpio = <&tlmm 123 0x00>;
+	};
+};
+
+&lpass_cdc {
+	qcom,num-macros = <3>;
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa884x_0220 {
+	status = "disabled";
+};
+
+&wsa884x_0221 {
+	status = "disabled";
+};
+
+&fm_i2s1_gpios {
+	status = "disabled";
+};
+
+&cdc_dmic01_gpios {
+	status = "disabled";
+};
+
+&cdc_dmic23_gpios {
+	status = "disabled";
+};
+
+&cdc_dmic45_gpios {
+	status = "disabled";
+};
+
+&cdc_dmic67_gpios {
+	status = "disabled";
+};
+
+&wsa_spkr_en01 {
+	status = "disabled";
+};
+
+&wsa_spkr_en02 {
+	status = "disabled";
+};
