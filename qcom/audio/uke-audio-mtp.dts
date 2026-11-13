@@ -206,11 +206,6 @@
 	asoc-codec = <&stub_codec>, <&lpass_cdc>, <&wcd939x_codec>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc", "wcd939x_codec";
 
-	/* uke's BT is not wired through the SLIMBUS/BTFM ASoC backend; the
-	 * btfm_slim_codec component never registers, so the card would defer
-	 * forever waiting for the SLIMBUS_7 RX/TX links. */
-	qcom,wcn-bt = <0>;
-
 	/* The WCD USBSS notifier used by the USB-C analog (AATC) path fails
 	 * with -EINVAL in this audio-kernel build, which makes
 	 * wcd_mbhc_start() fail and the whole sound card never register.
