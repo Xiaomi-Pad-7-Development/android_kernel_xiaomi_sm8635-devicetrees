@@ -2654,3 +2654,16 @@
     status = "disabled";
 };
 /* end: remove pm8010_m */
+
+/* uke is SM7675: the GPU is an Adreno 732. Report the stock chip id and
+ * model so the userspace driver picks the right tuning, and give the GMU
+ * its AOP mailbox so ACD can be enabled, as on stock. */
+&msm_gpu {
+	qcom,chipid = <0x43030b00>;
+	qcom,gpu-model = "Adreno732";
+};
+
+&gmu {
+	mboxes = <&qmp_aop 0>;
+	mbox-names = "aop";
+};
