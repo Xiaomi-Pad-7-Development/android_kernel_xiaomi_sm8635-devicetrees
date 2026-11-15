@@ -2460,6 +2460,17 @@
 &wcd_usbss {
         wcd-equ-bw-settings = <0x8>;
         wcd-equ-bw-settings-host = <0x8>;
+        wcd-usb-sbu-compliance;
+        interrupt-parent = <&spmi_bus>;
+        interrupts = <0x0 0xb6 0x1 IRQ_TYPE_EDGE_BOTH>;
+        interrupt-names = "usb_wcd";
+        nvmem-cells = <&usb_mode>;
+        nvmem-cell-names = "usb_mode";
+        reset-gpios = <&tlmm 119 0>;
+        pinctrl-names = "usbss_active", "usbss_sleep";
+        pinctrl-0 = <&wcd_usbss_reset_active>;
+        pinctrl-1 = <&wcd_usbss_reset_sleep>;
+        status = "ok";
 };
 
 &pm7550ba_eusb2_repeater {

@@ -43,4 +43,31 @@
                         input-enable;
                 };
         }; //wifi
+
+	wcd_usbss_reset_active: wcd_usbss_reset_active {
+		mux {
+			pins = "gpio119";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio119";
+			drive-strength = <16>;
+			output-high;
+		};
+	};
+
+	wcd_usbss_reset_sleep: wcd_usbss_reset_sleep {
+		mux {
+			pins = "gpio119";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio119";
+			drive-strength = <16>;
+			bias-disable;
+			output-low;
+		};
+	};
 }; //tlmm

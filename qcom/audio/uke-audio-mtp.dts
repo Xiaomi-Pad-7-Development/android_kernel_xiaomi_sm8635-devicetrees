@@ -206,15 +206,7 @@
 	asoc-codec = <&stub_codec>, <&lpass_cdc>, <&wcd939x_codec>;
 	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc", "wcd939x_codec";
 
-	/* The WCD USBSS notifier used by the USB-C analog (AATC) path fails
-	 * with -EINVAL in this audio-kernel build, which makes
-	 * wcd_mbhc_start() fail and the whole sound card never register.
-	 * Keep USB-C analog headset detection off for now; digital USB audio
-	 * and BT audio are unaffected. */
-	qcom,msm-mbhc-usbc-audio-supported = <0>;
-
-	/* This tablet has no 3.5mm jack; without this the MBHC external cable
-	 * detection false-detects a wired headset and audio is routed away from
-	 * the speakers. */
-	qcom,no-mbhc-jack;
+	/* USB-C analog headsets are detected through the WCD939x USB switch,
+	 * like stock. The tablet has no 3.5mm jack. */
+	qcom,msm-mbhc-usbc-audio-supported = <1>;
 };
